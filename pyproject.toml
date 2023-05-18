@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "pro-django-new-boston"
+version = "0.1.0"
+description = ""
+authors = ["Craig Carey <sgccarey@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.8.1"
+django = "^4.2.1"
+django-split-settings = "^1.2.0"
+pyyaml = "^6.0"
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^3.3.1"
+colorlog = "^6.7.0"
+
+[tool.yapf]
+based_on_style = "google"
+align_closing_bracket_with_visual_indent = true
+coalesce_brackets = true
+column_limit = 119
+dedent_closing_brackets = true
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
