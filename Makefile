@@ -19,13 +19,23 @@ migrations:
 migrate:
 	poetry run python -m core.manage migrate
 
+.PHONY: clean-migrations
+clean-migrations:
+	rm -f core/**/migrations/0*.py
+	rm -f db.sqlite3
+
+.PHONY: update-db
+update-db: clean-migrations migrations migrate
+
 .PHONY: run-server
 run-server:
 	poetry run python -m core.manage runserver
 
 .PHONY: superuser
 superuser:
-	poetry run python -m core.manage createsuperuser
+	DJANGO_SUPERUSER_PASSWORD=admin \
+	poetry run python -m core.manage \
+	createsuperuser --username admin --email admin@test.com --noinput
 
 .PHONY: update
 update: install migrate install-pre-commit;

@@ -1,26 +1,29 @@
 from .forms import RegisterUserForm
+
 from crispy_forms.templatetags.crispy_forms_filters import as_crispy_field
 from crispy_forms.utils import render_crispy_form
+
+from django.shortcuts import redirect
+from django.urls import reverse_lazy
 from django.contrib.auth import login
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.template.context_processors import csrf
+from django.contrib.auth.decorators import login_required
 
 
-# Create your views here.
-def register_user(request):
+def register(request):
     if request.method == 'GET':
         context = {'form': RegisterUserForm()}
-        return render(request, 'register_user.html', context)
+        return render(request, 'register.html', context)
 
     elif request.method == 'POST':
         form = RegisterUserForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
-            template = render(request, 'profile.html')
-            template['Hx-Push'] = 'accounts/profile/'
-            return template
+            response = redirect(reverse_lazy('profile'))
+            return response
 
         ctx = {}
         ctx.update(csrf(request))
@@ -46,6 +49,7 @@ def check_account_type(request):
     return render(request, 'partials/field.html', context)
 
 
+@login_required
 def profile(request):
     template = render(request, 'profile.html')
     return template

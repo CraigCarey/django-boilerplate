@@ -13,4 +13,4 @@ AUTH_USER_MODEL = 'accounts.User'
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap4'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-LOGOUT_REDIRECT_URL = '/accounts/register_user/'
+LOGOUT_REDIRECT_URL = '/'

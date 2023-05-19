@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from django import forms
 from django.urls import reverse_lazy
@@ -17,11 +17,6 @@ class RegisterUserForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper(self)
         self.helper.form_id = 'register-user-form'
-        self.helper.attrs = {
-            'hx-post': reverse_lazy('register_user'),
-            'hx-target': '#register-user-form',
-            'hx-swap': 'outerHTML',
-        }
         self.helper.add_input(Submit('submit', 'Submit'))
 
     account_type = forms.ChoiceField(
@@ -39,21 +34,14 @@ class RegisterUserForm(forms.ModelForm):
 
     invite_code = forms.CharField(label='Optional invite code', max_length=128, required=False)
 
+    license_expiry = datetime.now() + timedelta(days=7)
+
     class Meta:
         model = User
         fields = ('username', 'password', 'date_of_birth', 'account_type', 'invite_code')
         widgets = {
-            'password':
-                forms.PasswordInput(),
-            'username':
-                forms.TextInput(
-                    attrs={
-                        'hx-get': reverse_lazy('check-username'),
-                        'hx-target': '#div_id_username',
-                        # "hx-trigger": "keyup[target.value.length > 3]",
-                        'hx-trigger': 'keyup changed',
-                    }
-                ),
+            'username': forms.TextInput(),
+            'password': forms.PasswordInput(),
         }
 
     def clean_username(self):
@@ -97,3 +85,28 @@ class RegisterUserForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+
+
+class LoginUserForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        self.helper.form_id = 'login-user-form'
+        self.helper.attrs = {
+            'hx-post': reverse_lazy('login'),
+            'hx-target': '#login-user-form',
+            'hx-swap': 'outerHTML',
+        }
+        self.helper.add_input(Submit('submit', 'Submit'))
+
+    class Meta:
+        model = User
+        fields = (
+            'username',
+            'password',
+        )
+        widgets = {
+            'username': forms.TextInput(),
+            'password': forms.PasswordInput(),
+        }
