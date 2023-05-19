@@ -40,7 +40,6 @@ repos:
           - types-toml
 exclude: |
     ^(
-        ^migrations/.*|
         tests/.*|
         .*venv/.*
     )$
