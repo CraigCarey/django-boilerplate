@@ -1,12 +1,12 @@
 Django Boilerplate
 ==================
 
-Based on `New Boston YouTube tutorials <https://youtu.be/DaxcmbWcdTA>`_
-
 Features:
  * Uses django-split-settings to enable separation of settings
  * Settings are overridable from the command line
  * Linting & pre-commit
+ * Apps totally isolated from project
+ * Basic user registration app using crispy forms + bootstrap4
 
 Project Setup
 =============

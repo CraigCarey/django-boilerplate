@@ -17,7 +17,7 @@ if not LOCAL_SETTINGS_PATH:
 if not os.path.isabs(LOCAL_SETTINGS_PATH):
     LOCAL_SETTINGS_PATH = str(BASE_DIR / LOCAL_SETTINGS_PATH)
 
-APPS_SETTINGS_PATH = 'apps/settings.py'
+APPS_SETTINGS_PATH = f'{BASE_DIR}/core/apps/settings.py'
 
 # These are the order that settings take precedence, e.g. settings in LOCAL_SETTINGS_PATH can override base
 include(

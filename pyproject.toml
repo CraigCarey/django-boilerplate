@@ -4,13 +4,15 @@ version = "0.1.0"
 description = ""
 authors = ["Craig Carey <sgccarey@gmail.com>"]
 license = "MIT"
-readme = "README.md"
+readme = "README.rst"
 
 [tool.poetry.dependencies]
 python = "^3.8.1"
 django = "^4.2.1"
 django-split-settings = "^1.2.0"
 pyyaml = "^6.0"
+django-crispy-forms = "^2.0"
+crispy-bootstrap4 = "^2022.1"
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^3.3.1"
