@@ -31,6 +31,10 @@ update-db: clean-migrations migrations migrate
 run-server:
 	poetry run python -m core.manage runserver
 
+.PHONY: test
+test:
+	poetry run python -m core.manage test
+
 .PHONY: superuser
 superuser:
 	DJANGO_SUPERUSER_PASSWORD=admin \

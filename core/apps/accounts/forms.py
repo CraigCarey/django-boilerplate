@@ -53,7 +53,7 @@ class RegisterUserForm(forms.ModelForm):
     def clean_account_type(self):
         account_type = self.cleaned_data['account_type']
         if User.objects.filter(account_type=account_type).count() > 3:
-            raise forms.ValidationError('There are no spaces on this course')
+            raise forms.ValidationError('This account type is unavailable')
         return account_type
 
     def clean_invite_code(self):
