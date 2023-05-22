@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Accounts2 Sign-Up{% endblock %}
+
+{% block content %}
+
+<form method='post' class='mb-4'>
+    {% csrf_token %}
+    {{ form | crispy }}
+
+    <button type="submit" class="btn btn-primary">Register</button>
+
+</form>
+
+Have an account? <a href='/login'>Login here</a>
+
+{% endblock %}

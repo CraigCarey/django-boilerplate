@@ -37,3 +37,9 @@ When running in docker:
 .. code-block::
 
     CORESETTINGS_IN_DOCKER=true make run-server
+
+TODO
+====
+
+ * password reset
+ * email confirmation
