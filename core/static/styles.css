@@ -1,0 +1,27 @@
+/* Navbar */
+
+.boilerplate-navbar {
+  background-color: #a6def8;
+}
+
+.navbar-brand {
+  padding-left: 10px;
+  height: 100%;
+}
+
+.navbar-logo {
+  height: 40px;
+}
+
+.navbar-nav {
+  padding-right: 10px;
+}
+
+.navbar-toggler,
+.navbar-toggler:focus,
+.navbar-toggler:active,
+.navbar-toggler-icon:focus {
+  outline: none;
+  border: none;
+  box-shadow: none;
+}

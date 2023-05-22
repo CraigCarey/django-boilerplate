@@ -6,7 +6,7 @@ Features:
  * Settings are overridable from the command line
  * Linting & pre-commit
  * Apps totally isolated from project
- * Basic user registration app using crispy forms + bootstrap4
+ * Basic user registration app using crispy forms + bootstrap5
 
 Project Setup
 =============
