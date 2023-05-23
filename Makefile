@@ -21,7 +21,7 @@ migrate:
 
 .PHONY: clean-migrations
 clean-migrations:
-	rm -f core/**/migrations/0*.py
+	rm -f core/apps/**/migrations/0*.py
 	rm -f db.sqlite3
 
 .PHONY: update-db
@@ -43,3 +43,6 @@ superuser:
 
 .PHONY: update
 update: install migrate install-pre-commit;
+
+.PHONY: reset
+reset: clean-migrations migrations migrate run-server

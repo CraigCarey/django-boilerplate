@@ -9,7 +9,7 @@ INSTALLED_APPS += (
 
 TEMPLATES[0]['DIRS'].append('core/apps/templates')  # type: ignore
 
-# AUTH_USER_MODEL = 'accounts.User'
+AUTH_USER_MODEL = 'accounts2.User'
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
