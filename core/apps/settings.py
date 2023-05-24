@@ -1,11 +1,14 @@
 from core.project.settings.base import INSTALLED_APPS, TEMPLATES
 
 INSTALLED_APPS += (
-    # 'core.apps.accounts',
-    'core.apps.accounts2',
     'crispy_forms',
     'crispy_bootstrap5',
 )
+
+CUSTOM_APPS = ('accounts2', 'articles')
+
+for a in CUSTOM_APPS:
+    INSTALLED_APPS.append(f'core.apps.{a}')
 
 TEMPLATES[0]['DIRS'].append('core/apps/templates')  # type: ignore
 

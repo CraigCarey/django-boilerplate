@@ -45,4 +45,4 @@ superuser:
 update: install migrate install-pre-commit;
 
 .PHONY: reset
-reset: clean-migrations migrations migrate run-server
+reset: clean-migrations migrations migrate superuser run-server

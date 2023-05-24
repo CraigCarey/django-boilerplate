@@ -37,3 +37,4 @@ class Invite(models.Model):
     expiry = models.DateField()
     use_count = models.SmallIntegerField(default=0)
     use_limit = models.SmallIntegerField(default=1)
+    created_at = models.DateTimeField(auto_now_add=True)
