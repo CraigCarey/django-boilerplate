@@ -12,7 +12,9 @@ for a in CUSTOM_APPS:
 
 TEMPLATES[0]['DIRS'].append('core/apps/templates')  # type: ignore
 
+# TODO: move into accounts2 settings?
 AUTH_USER_MODEL = 'accounts2.User'
+AUTHENTICATION_BACKENDS = ('core.apps.accounts2.backends.EmailBackend',)
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
 CRISPY_TEMPLATE_PACK = 'bootstrap5'

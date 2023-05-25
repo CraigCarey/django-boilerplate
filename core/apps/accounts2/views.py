@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 from .forms import UserRegistrationForm, UserLoginForm
 
@@ -32,6 +33,7 @@ def sign_up(request):
 
 @user_not_authenticated
 def custom_login(request):
+
     if request.method == 'POST':
         form = UserLoginForm(request=request, data=request.POST)
         if form.is_valid():
@@ -42,7 +44,7 @@ def custom_login(request):
             if user is not None:
                 login(request, user)
                 messages.success(request, f'Hello <b>{user.username}</b>! You have been logged in')
-                return redirect('homepage')
+                return redirect('home')
 
         else:
             for _key, error in list(form.errors.items()):
@@ -51,3 +53,9 @@ def custom_login(request):
     form = UserLoginForm()
 
     return render(request=request, template_name='registration/login.html', context={'form': form})
+
+
+@login_required
+def profile(request):
+    template = render(request, 'accounts2/profile.html')
+    return template
