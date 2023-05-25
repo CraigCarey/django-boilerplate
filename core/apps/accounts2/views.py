@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 
 from .forms import UserRegistrationForm, UserLoginForm
 
@@ -53,9 +52,3 @@ def custom_login(request):
     form = UserLoginForm()
 
     return render(request=request, template_name='registration/login.html', context={'form': form})
-
-
-@login_required
-def profile(request):
-    template = render(request, 'accounts2/profile.html')
-    return template

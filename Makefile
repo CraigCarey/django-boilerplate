@@ -39,7 +39,7 @@ test:
 superuser:
 	DJANGO_SUPERUSER_PASSWORD=admin \
 	poetry run python -m core.manage \
-	createsuperuser --username admin --email admin@test.com --noinput
+	createsuperuser --username admin --email craigc@oosto.com --noinput
 
 .PHONY: update
 update: install migrate install-pre-commit;

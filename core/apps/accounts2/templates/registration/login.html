@@ -13,6 +13,13 @@
 
 </form>
 
-Need an account? <a href='/sign_up'>Sign up here</a>
+<div class="border-top pt-3">
+    <small class="text-muted">
+        Need An Account? <a class="ml-2" href="{% url 'register' %}">Sign up here</a>
+    </small><br>
+    <small class="text-muted">
+        <a href="{% url 'password_reset' %}">Forgotten your password?</a>
+    </small>
+</div>
 
 {% endblock %}
