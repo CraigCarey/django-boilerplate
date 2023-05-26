@@ -49,5 +49,5 @@ Without the following environment variables emails will be written to file.
 TODO
 ====
 
- * email confirmation
+ * messages / notifications
  * tests

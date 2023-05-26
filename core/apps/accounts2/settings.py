@@ -27,3 +27,5 @@ except AttributeError:
         ' - HOST_EMAIL_PASSWORD\n'
         f'  Using file based email backend instead ({EMAIL_FILE_PATH})\n'
     )
+
+PASSWORD_RESET_TIMEOUT = 14400  # 4hrs
