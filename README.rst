@@ -38,8 +38,16 @@ When running in docker:
 
     CORESETTINGS_IN_DOCKER=true make run-server
 
+SMTP Setup
+==========
+Without the following environment variables emails will be written to file.
+
+.. code-block::
+    export CORESETTINGS_HOST_EMAIL_ADDRESS="sdkdemo@anyvision.it"
+    export CORESETTINGS_HOST_EMAIL_PASSWORD="<insert password>"
+
 TODO
 ====
 
- * password reset
  * email confirmation
+ * tests

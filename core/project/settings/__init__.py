@@ -21,6 +21,6 @@ APPS_SETTINGS_PATH = f'{BASE_DIR}/core/apps/settings.py'
 
 # These are the order that settings take precedence, e.g. settings in LOCAL_SETTINGS_PATH can override base
 include(
-    'base.py', 'logging.py', 'custom.py', optional(APPS_SETTINGS_PATH), optional(LOCAL_SETTINGS_PATH), 'envvars.py',
-    'docker.py'
+    'base.py', 'logging.py', 'custom.py', optional(LOCAL_SETTINGS_PATH), 'envvars.py', 'docker.py',
+    optional(APPS_SETTINGS_PATH)
 )

@@ -31,6 +31,10 @@ update-db: clean-migrations migrations migrate
 run-server:
 	poetry run python -m core.manage runserver
 
+.PHONY: send-email
+send-email:
+	poetry run python -m core.manage shell < scripts/send_email.py
+
 .PHONY: test
 test:
 	poetry run python -m core.manage test

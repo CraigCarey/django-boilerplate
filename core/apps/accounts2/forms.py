@@ -45,7 +45,6 @@ class UserLoginForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
         super(UserLoginForm, self).__init__(*args, **kwargs)
 
-    # TODO: email login not working
     username = forms.CharField(
         widget=forms.TextInput(attrs={
             'class': 'form-control',
