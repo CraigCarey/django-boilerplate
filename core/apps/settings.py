@@ -1,3 +1,7 @@
+import logging
+
+from django.conf import settings
+
 from core.project.settings.base import INSTALLED_APPS, TEMPLATES
 
 from split_settings.tools import include, optional
@@ -21,3 +25,6 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 LOGOUT_REDIRECT_URL = '/'
+
+logger = logging.getLogger(__name__)
+logger.debug('DB Config:\n' f'{settings.DATABASES}')

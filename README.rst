@@ -16,6 +16,7 @@ Install dependencies:
 .. code-block::
 
     apt install libpq-dev
+    pip install poetry
     poetry install
 
 
@@ -40,14 +41,45 @@ When running in docker:
 
 SMTP Setup
 ==========
-Without the following environment variables emails will be written to file.
+Without the following environment variables emails will be written to a local file.
 
 .. code-block::
-    export CORESETTINGS_HOST_EMAIL_ADDRESS="sdkdemo@anyvision.it"
+    export CORESETTINGS_HOST_EMAIL_ADDRESS="<insert email address>"
     export CORESETTINGS_HOST_EMAIL_PASSWORD="<insert password>"
+
+
+Containers
+==========
+
+This runs the db service only, for local development
+
+.. code-block::
+    make make dev-docker-compose-up
+
+
+To run the app in prod:
+
+.. code-block::
+    make make prod-docker-compose-up
+
+
+Overriding DB Config
+====================
+
+`CORESETTINGS_DATABASES` env var takes precedence:
+
+.. code-block::
+    CORESETTINGS_DATABASES='{"default":{"HOST":"db"}}' make run-server
+
+After that, `DB_MODE` env var:
+
+.. code-block::
+    CORESETTINGS_DB_MODE=postgres make run-server
+
+If neither env vars are provided, it will default to sqlite
 
 TODO
 ====
-
  * messages / notifications
  * tests
+ * prod server (Daphne?)

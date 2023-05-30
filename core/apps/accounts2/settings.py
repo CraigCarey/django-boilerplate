@@ -10,12 +10,12 @@ AUTHENTICATION_BACKENDS = ('core.apps.accounts2.backends.EmailBackend',)
 
 try:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-    EMAIL_HOST = 'mitb.anyvision.it'
+    EMAIL_HOST = settings.EMAIL_HOST_SERVER
     EMAIL_USE_TLS = True
     EMAIL_PORT = 587
-    EMAIL_HOST_USER = settings.HOST_EMAIL_ADDRESS
-    EMAIL_HOST_PASSWORD = settings.HOST_EMAIL_PASSWORD
-    DEFAULT_FROM_EMAIL = 'sdkdemo@anyvision.it'
+    EMAIL_HOST_USER = settings.EMAIL_HOST_ADDRESS
+    EMAIL_HOST_PASSWORD = settings.EMAIL_HOST_PASSWORD
+    DEFAULT_FROM_EMAIL = settings.EMAIL_FROM_ADDRESS
 except AttributeError:
     EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
     EMAIL_FILE_PATH = BASE_DIR / 'sent_emails'
@@ -23,8 +23,10 @@ except AttributeError:
     logger = logging.getLogger(__name__)
     logger.info(
         'SMTP not configured, did you set the following env variables?\n'
-        ' - HOST_EMAIL_ADDRESS\n'
-        ' - HOST_EMAIL_PASSWORD\n'
+        ' - EMAIL_HOST_SERVER\n'
+        ' - EMAIL_HOST_ADDRESS\n'
+        ' - EMAIL_HOST_PASSWORD\n'
+        ' - EMAIL_FROM_ADDRESS\n'
         f'  Using file based email backend instead ({EMAIL_FILE_PATH})\n'
     )
 
