@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "pro-django-new-boston"
+name = "django-boilerplate"
 version = "0.1.0"
 description = ""
 authors = ["Craig Carey <sgccarey@gmail.com>"]
@@ -14,10 +14,19 @@ pyyaml = "^6.0"
 django-crispy-forms = "^2.0"
 crispy-bootstrap5 = "^0.7"
 psycopg2 = "^2.9.6"
+pytest = "^7.3.1"
+pytest-xdist = "^3.3.1"
+pytest-django = "^4.5.2"
+model-bakery = "^1.11.0"
+freezegun = "^1.2.2"
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^3.3.1"
 colorlog = "^6.7.0"
+
+[tool.isort]
+multi_line_output = 5
+line_length = 119
 
 [tool.yapf]
 based_on_style = "google"
@@ -25,6 +34,13 @@ align_closing_bracket_with_visual_indent = true
 coalesce_brackets = true
 column_limit = 119
 dedent_closing_brackets = true
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "core.project.settings"
+django_find_project = false
+python_files = "test_*.py"
+testpaths = ["core"]
+filterwarnings = "ignore::DeprecationWarning:^(?!node\\.).*:"
 
 [build-system]
 requires = ["poetry-core"]

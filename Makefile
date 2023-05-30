@@ -64,8 +64,16 @@ prod-docker-compose-down:
 	docker compose -f docker-compose.yml down
 	docker rmi -f django-boilerplate-app
 
+.PHONY: shell
+shell:
+	poetry run python -m core.manage shell
+
 .PHONY: update
 update: install migrate install-pre-commit;
 
 .PHONY: reset
 reset: clean-migrations migrations migrate superuser run-server
+
+.PHONY: test
+test:
+	PYTHONPATH=. poetry run pytest -v -rs -n auto --show-capture=no

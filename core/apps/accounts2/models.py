@@ -1,8 +1,5 @@
-from datetime import timedelta
-
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-import django.dispatch
 
 
 class User(AbstractUser):
@@ -22,14 +19,6 @@ class User(AbstractUser):
 
     class Meta:
         app_label = 'accounts2'
-
-
-@django.dispatch.receiver(models.signals.post_init, sender=User)
-def set_default_user_license_expiry(sender, instance, *args, **kwargs):
-
-    if instance.created_at:
-        instance.license_expiry = instance.created_at + timedelta(days=7)
-        instance.save()
 
 
 class Invite(models.Model):

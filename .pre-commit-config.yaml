@@ -37,6 +37,7 @@ repos:
           - types-requests
           - types-PyYAML
           - types-toml
+          - types-freezegun
 exclude: |
     (?x)^(
         .*/.*/.*/migrations/.*
