@@ -81,6 +81,4 @@ If neither env vars are provided, it will default to sqlite
 
 TODO
 ====
- * messages / notifications
- * tests
  * prod server (Daphne?)

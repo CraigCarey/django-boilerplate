@@ -38,12 +38,14 @@ def activate(request, uidb64, token):
         user.is_active = True
         user.save()
 
-        messages.success(request, 'Thank you for your email confirmation. Now you can login your account.')
+        messages.success(
+            request, 'Thank you for your confirming your emil address. You may now log in to your account.'
+        )
         return redirect('activate-done')
     else:
-        messages.error(request, 'Activation link is invalid!')
+        messages.error(request, 'Activation link is invalid')
 
-    return redirect('homepage')
+    return redirect('home')
 
 
 def activate_done(request):
@@ -68,11 +70,12 @@ def _activate_email(request, user, to_email):
     email = EmailMessage(mail_subject, message, to=[to_email])
     if email.send():
         messages.success(
-            request, f'Dear <b>{user}</b>, please go to you email <b>{to_email}</b> inbox and click on \
-            received activation link to confirm and complete the registration. <b>Note:</b> Check your spam folder.'
+            request, f'<b>{user}</b>, please go to your email inbox and follow the  \
+            received activation link to confirm and complete the registration. \
+            <b>Note:</b> You may need to check your spam folder.'
         )
     else:
-        messages.error(request, f'Problem sending confirmation email to {to_email}, check if you typed it correctly.')
+        messages.error(request, f'Problem sending confirmation email to {to_email}')
 
 
 def sign_up(request):
@@ -95,6 +98,16 @@ def sign_up(request):
     return render(request, 'registration/sign_up.html', {'form': form})
 
 
+def message_demo(request):
+    messages.debug(request, 'debug message')
+    messages.info(request, 'info message')
+    messages.success(request, 'success message')
+    messages.warning(request, 'warning message')
+    messages.error(request, 'error message')
+
+    return render(request, 'accounts/home.html')
+
+
 @user_not_authenticated
 def custom_login(request):
 
@@ -107,7 +120,7 @@ def custom_login(request):
             )
             if user is not None:
                 login(request, user)
-                messages.success(request, f'Hello <b>{user.username}</b>! You have been logged in')
+                messages.success(request, f'Hello <b>{user.username}</b>. You have been logged in')
                 return redirect('home')
 
         else:

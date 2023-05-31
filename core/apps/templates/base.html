@@ -29,10 +29,20 @@
 <body>
     {% include 'partials/navbar.html' %}
 
-    <div class="container mt-4">
+    <main role="main" class="container-xl">
+        <div class="row">
+            <div class="col-lg-12 col-md-12-p-0 col-sm-12">
+                {% include 'partials/messaging.html' %}
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+    </main>
+
+    {% comment %} <div class="container mt-4">
         {% block content %}
         {% endblock %}
-    </div>
+    </div> {% endcomment %}
 
     <script>
         <!--  Add the CSRF token for all verbs, not just POST -->
