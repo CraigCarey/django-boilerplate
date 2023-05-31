@@ -11,7 +11,7 @@ INSTALLED_APPS += (
     'crispy_bootstrap5',
 )
 
-CUSTOM_APPS = ('accounts2', 'articles')
+CUSTOM_APPS = ('accounts', 'articles')
 
 for a in CUSTOM_APPS:
     INSTALLED_APPS.append(f'core.apps.{a}')

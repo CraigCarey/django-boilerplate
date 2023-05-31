@@ -3,10 +3,10 @@ import logging
 from core.project.settings.base import BASE_DIR, TEMPLATES
 from django.conf import settings
 
-TEMPLATES[0]['DIRS'].append('core/apps/accounts2/templates')  # type: ignore
+TEMPLATES[0]['DIRS'].append('core/apps/accounts/templates')  # type: ignore
 
-AUTH_USER_MODEL = 'accounts2.User'
-AUTHENTICATION_BACKENDS = ('core.apps.accounts2.backends.EmailBackend',)
+AUTH_USER_MODEL = 'accounts.User'
+AUTHENTICATION_BACKENDS = ('core.apps.accounts.backends.EmailBackend',)
 
 try:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

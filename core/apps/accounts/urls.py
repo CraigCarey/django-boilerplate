@@ -1,19 +1,14 @@
-from django.contrib.auth.views import LoginView, LogoutView
-from django.urls import path
-
+from django.urls import include, path
 from . import views
 
 urlpatterns = [
-    path('', LoginView.as_view(template_name='login.html'), name='login'),
-    path('login/', LoginView.as_view(template_name='login.html'), name='login'),
-    path('register/', views.register, name='register'),
-    path('logout/', LogoutView.as_view(), name='logout'),
+    path('', views.home, name='root'),
+    path('', include('django.contrib.auth.urls')),
+    path('home', views.home, name='home'),
+    path('sign_up', views.sign_up, name='sign_up'),
+    path('register', views.sign_up, name='register'),
+    path('login', views.custom_login, name='login'),
+    path('activate/<uidb64>/<token>', views.activate, name='activate'),
+    path('activate/waiting/', views.activate_waiting, name='activate-waiting'),
+    path('activate/done/', views.activate_done, name='activate-done'),
 ]
-
-htmx_urlpatterns = [
-    path('check-username', views.check_username, name='check-username'),
-    path('check-account-type', views.check_account_type, name='check-account-type'),
-    path('profile/', views.profile, name='profile'),
-]
-
-urlpatterns += htmx_urlpatterns

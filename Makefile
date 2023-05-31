@@ -76,4 +76,5 @@ reset: clean-migrations migrations migrate superuser run-server
 
 .PHONY: test
 test:
-	PYTHONPATH=. poetry run pytest -v -rs -n auto --show-capture=no
+	# PYTHONPATH=. poetry run pytest -v -rs -n auto --show-capture=no
+	PYTHONPATH=. poetry run pytest -s
