@@ -35,10 +35,6 @@ run-server:
 send-email:
 	poetry run python -m core.manage shell < scripts/send_email.py
 
-.PHONY: test
-test:
-	poetry run python -m core.manage test
-
 .PHONY: superuser
 superuser:
 	DJANGO_SUPERUSER_PASSWORD=admin \
@@ -76,5 +72,8 @@ reset: clean-migrations migrations migrate superuser run-server
 
 .PHONY: test
 test:
-	# PYTHONPATH=. poetry run pytest -v -rs -n auto --show-capture=no
-	PYTHONPATH=. poetry run pytest -s
+	PYTHONPATH=. poetry run pytest -v -rs -n auto --show-capture=no
+
+.PHONY: test-verbose
+test-verbose:
+	PYTHONPATH=. poetry run pytest -v -s -n auto

@@ -26,6 +26,7 @@ Create your own version of settings:
 
     mkdir -p local
     cp core/project/settings/templates/settings.dev.py local
+    cp core/project/settings/templates/settings.unittests.py local
 
 Use local dev settings:
 
