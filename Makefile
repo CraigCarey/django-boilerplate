@@ -39,7 +39,7 @@ send-email:
 superuser:
 	DJANGO_SUPERUSER_PASSWORD=admin \
 	poetry run python -m core.manage \
-	createsuperuser --username admin --email craigc@oosto.com --noinput
+	createsuperuser --username admin --email admin@test.com --noinput
 
 .PHONY: dev-docker-compose-up
 dev-docker-compose-up:
