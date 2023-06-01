@@ -1,26 +1,29 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate, get_user_model
 from django.contrib import messages
+from django.contrib.auth import authenticate, get_user_model, login
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
-from django.template.loader import render_to_string
 from django.contrib.sites.shortcuts import get_current_site
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.utils.encoding import force_bytes, force_str
 from django.core.mail import EmailMessage
-
-from .forms import UserRegistrationForm, UserLoginForm
+from django.shortcuts import redirect, render
+from django.template.loader import render_to_string
+from django.utils.encoding import force_bytes, force_str
+from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 
 from .decorators import user_not_authenticated
+from .forms import UserLoginForm, UserRegistrationForm
 
 
 def home(request):
     return render(request, 'accounts/home.html')
 
 
+def profile(request):
+    return render(request, 'accounts/profile.html')
+
+
 class AccountActivationTokenGenerator(PasswordResetTokenGenerator):
 
     def _make_hash_value(self, user, timestamp):
-        return (str(user.pk) + str(timestamp) + str(user.is_active))
+        return str(user.pk) + str(timestamp) + str(user.is_active)
 
 
 account_activation_token = AccountActivationTokenGenerator()
@@ -39,9 +42,10 @@ def activate(request, uidb64, token):
         user.save()
 
         messages.success(
-            request, 'Thank you for your confirming your emil address. You may now log in to your account.'
+            request,
+            'Thank you for your confirming your emil address. You may now log in to your account.',
         )
-        return redirect('activate-done')
+        return redirect('login')
     else:
         messages.error(request, 'Activation link is invalid')
 
@@ -52,27 +56,25 @@ def activate_done(request):
     return render(request, 'registration/activate_account_done.html')
 
 
-def activate_waiting(request):
-    return render(request, 'registration/activate_account_waiting.html')
-
-
 def _activate_email(request, user, to_email):
     mail_subject = 'Activate your user account.'
     message = render_to_string(
-        'registration/activate_account_email.html', {
+        'registration/activate_account_email.html',
+        {
             'user': user.username,
             'domain': get_current_site(request).domain,
             'uid': urlsafe_base64_encode(force_bytes(user.pk)),
             'token': account_activation_token.make_token(user),
-            'protocol': 'https' if request.is_secure() else 'http'
-        }
+            'protocol': 'https' if request.is_secure() else 'http',
+        },
     )
     email = EmailMessage(mail_subject, message, to=[to_email])
     if email.send():
         messages.success(
-            request, f'<b>{user}</b>, please go to your email inbox and follow the  \
+            request,
+            f'<b>{user}</b>, please go to your email inbox and follow the  \
             received activation link to confirm and complete the registration. \
-            <b>Note:</b> You may need to check your spam folder.'
+            <b>Note:</b> You may need to check your spam folder.',
         )
     else:
         messages.error(request, f'Problem sending confirmation email to {to_email}')
@@ -89,7 +91,7 @@ def sign_up(request):
             user.is_active = False
             user.save()
             _activate_email(request, user, form.cleaned_data.get('email'))
-            return redirect('/activate/waiting')
+            return redirect('login')
 
     elif request.method == 'GET':
         # Create an empty form and render it
@@ -105,7 +107,7 @@ def message_demo(request):
     messages.warning(request, 'warning message')
     messages.error(request, 'error message')
 
-    return render(request, 'accounts/home.html')
+    return redirect('profile')
 
 
 @user_not_authenticated

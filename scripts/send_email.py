@@ -8,4 +8,11 @@ from_email = settings.DEFAULT_FROM_EMAIL
 message = 'This is my test message'
 recipient_list = ['lknkjsdhfkjhsd09879bnasdfbs@gmail.com']
 html_message = 'this is the body'
-send_mail(subject, message, from_email, recipient_list, fail_silently=False, html_message=html_message)
+send_mail(
+    subject,
+    message,
+    from_email,
+    recipient_list,
+    fail_silently=False,
+    html_message=html_message,
+)

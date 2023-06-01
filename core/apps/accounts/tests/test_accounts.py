@@ -2,8 +2,8 @@ import pytest
 
 from datetime import timedelta
 
-from django.utils import timezone
 from django.conf import settings
+from django.utils import timezone
 
 from core.apps.accounts.models import User
 

@@ -1,9 +1,12 @@
+from datetime import datetime
+
 from django import forms
-from django.contrib.auth.forms import (UserCreationForm, AuthenticationForm)
-from django.db import models
 from django.contrib.auth import get_user_model
-# from captcha.fields import ReCaptchaField
-# from captcha.widgets import ReCaptchaV2Checkbox
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.core.exceptions import ValidationError, ObjectDoesNotExist
+from django.db import models
+
+from .models import Invite
 
 
 class UserRegistrationForm(UserCreationForm):
@@ -38,6 +41,25 @@ class UserRegistrationForm(UserCreationForm):
         if len(username) <= min_username_len:
             raise forms.ValidationError(f'Username must be at least {min_username_len} characters')
         return username
+
+    def clean_invite_code(self):
+        invite_code = self.cleaned_data['invite_code']
+
+        try:
+            invite = Invite.objects.get(invite_code=invite_code)
+        except ObjectDoesNotExist:
+            raise ValidationError(f'"{invite_code}" is not a valid invite code')
+
+        if invite.expiry < datetime.now().date():
+            raise ValidationError(f'Invite code "{invite_code}" has expired')
+
+        if invite.use_count >= invite.use_limit:
+            raise ValidationError(f'Invite code "{invite_code}" has reached use limit')
+
+        invite.use_count += 1
+        invite.save()
+
+        return invite_code
 
 
 class UserLoginForm(AuthenticationForm):

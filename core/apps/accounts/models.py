@@ -1,4 +1,7 @@
+from datetime import datetime
+
 from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.signals import user_logged_in
 from django.db import models
 
 
@@ -25,3 +28,22 @@ class Invite(models.Model):
     expiry = models.DateField()
     use_count = models.SmallIntegerField(default=0)
     use_limit = models.SmallIntegerField(default=1)
+
+
+def check_license(user):
+
+    if user.is_anonymous is False and user.is_superuser is False:
+        expiry_date = user.license_expiry
+        todays_date = datetime.today().date()
+
+        if todays_date > expiry_date:
+            user.license_expired = True
+            user.save()
+
+
+# Signals
+def _check_license_handler(sender, user, request, **kwargs):
+    check_license(user)
+
+
+user_logged_in.connect(_check_license_handler)

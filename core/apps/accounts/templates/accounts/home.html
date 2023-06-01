@@ -3,12 +3,8 @@
 {% block content %}
 
 {% if user.is_authenticated %}
-<p><b>Username:</b> {{ request.user.username }}</p>
 
-<p><b>Account type:</b> {{ request.user.get_account_type_display }}</p>
-
-<p>Change your password <a href="{% url 'password_change' %}">here</a></p>
-
+<meta http-equiv="refresh" content="0; url={% url 'profile' %}" />
 
 {% else %}
 

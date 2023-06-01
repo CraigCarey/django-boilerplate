@@ -1,7 +1,8 @@
 import logging
 
-from core.project.settings.base import BASE_DIR, TEMPLATES
 from django.conf import settings
+
+from core.project.settings.base import BASE_DIR, TEMPLATES
 
 TEMPLATES[0]['DIRS'].append('core/apps/accounts/templates')  # type: ignore
 

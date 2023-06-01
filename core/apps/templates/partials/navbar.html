@@ -1,7 +1,7 @@
 {% load static %}
 <nav class="navbar navbar-light boilerplate-navbar mb-2">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/">
+        <a class="navbar-brand" href="{% url 'home' %}">
             <img
                 class="navbar-logo"
                 src="{% static 'logo.svg' %}"
@@ -24,7 +24,8 @@
             <ul class="navbar-nav">
                 {% if user.is_authenticated %}
                 <li class="nav-item ms-auto">
-                    <a class="nav-link" href="{% url 'home' %}">Profile</a>
+                    <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+                </li>
                 </li>
                 {% if user.is_superuser %}
                 <li class="nav-item ms-auto">

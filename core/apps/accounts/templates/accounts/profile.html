@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+<p><b>Username:</b> {{ request.user.username }}</p>
+
+<p><b>License Expiry:</b> {{ request.user.license_expiry }}</p>
+
+<p><b>Invite Code:</b> {{ request.user.invite_code }}</p>
+
+<p>Change your password <a href="{% url 'password_change' %}">here</a></p>
+
+{% else %}
+
+<meta http-equiv="refresh" content="0; url={% url 'login' %}" />
+
+{% endif %}
+
+{% endblock %}
