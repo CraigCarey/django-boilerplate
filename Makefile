@@ -76,4 +76,4 @@ test:
 
 .PHONY: test-verbose
 test-verbose:
-	PYTHONPATH=. poetry run pytest -v -s -n auto
+	PYTHONPATH=. poetry run pytest -v

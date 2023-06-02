@@ -15,8 +15,14 @@ def test_secret_key_fixture():
 
 @pytest.mark.django_db
 # @freeze_time('2023-05-31')
-def test_create_account(sender_account):
+def test_create_account(sender_account, sender_username):
+
+    # without including sender_account the object isn't baked
     user = User.objects.get(pk=sender_account.pk)
+    assert user
+
+    user = User.objects.get(username=sender_username)
+    assert user
 
     assert user.email == 'test@test.com'
     assert user.invite_code == 'valid'

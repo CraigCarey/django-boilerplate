@@ -54,6 +54,8 @@ def sender_password():
 
 
 @pytest.fixture
-def sender_account(sender_valid_invite_code, sender_email, db):
+def sender_account(sender_username, sender_email, sender_valid_invite_code, db):
     print('sender_account...')
-    return baker.make('accounts.User', email=sender_email, invite_code=sender_valid_invite_code)
+    return baker.make(
+        'accounts.User', username=sender_username, email=sender_email, invite_code=sender_valid_invite_code
+    )
