@@ -1,17 +1,16 @@
-import logging
-
-from django.conf import settings
+from split_settings.tools import include, optional
 
 from core.project.settings.base import INSTALLED_APPS, TEMPLATES
-
-from split_settings.tools import include, optional
 
 INSTALLED_APPS += (
     'crispy_forms',
     'crispy_bootstrap5',
 )
 
-CUSTOM_APPS = ('accounts', 'articles')
+CUSTOM_APPS = (
+    'accounts',
+    'articles',
+)
 
 for a in CUSTOM_APPS:
     INSTALLED_APPS.append(f'core.apps.{a}')
@@ -27,5 +26,6 @@ CRISPY_TEMPLATE_PACK = 'bootstrap5'
 LOGOUT_REDIRECT_URL = '/'
 LOGIN_URL = '/'
 
-logger = logging.getLogger(__name__)
-logger.debug('DB Config:\n' f'{settings.DATABASES}')
+# logger = logging.getLogger(__name__)
+# logger.setLevel(logging.CRITICAL)
+# logger.log(msg='DB Config:\n' f'{settings.DATABASES}')

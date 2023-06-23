@@ -22,7 +22,7 @@ except AttributeError:
     EMAIL_FILE_PATH = BASE_DIR / 'sent_emails'
 
     logger = logging.getLogger(__name__)
-    logger.info(
+    logger.warning(
         'SMTP not configured, did you set the following env variables?\n'
         ' - EMAIL_HOST_SERVER\n'
         ' - EMAIL_HOST_ADDRESS\n'

@@ -17,12 +17,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
-# Implemented by settings.dev.py
-SECRET_KEY = NotImplemented
-
-# False by default, overriden by settings.dev.py
-DEBUG = False
-
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 # Application definition
@@ -66,11 +60,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'core.project.wsgi.application'
 
-# Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
-DB_MODE = 'sqlite'
-
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
@@ -110,3 +99,11 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Settings overrideable using CORESETTINGS_... env vars or other settings files
+SECRET_KEY = NotImplemented
+DEBUG = False
+DB_MODE = 'sqlite'  # sqlite, azure, postgres
+VA_SERVICE_MODE = 'local'  # local, celery
+STORAGE_MODE = 'local'  # local, azure
+LOGGING_LEVEL = 'WARNING'

@@ -3,7 +3,7 @@ LOGGING = {
     'disable_existing_loggers': False,
     'formatters': {
         'standard': {
-            'format': '%(asctime)s %(levelname)s %(name)s %(message)s'
+            'format': '%(asctime)s %(process)d %(levelname)s %(filename)s:%(lineno)d:%(funcName)s - %(message)s'
         },
     },
     'handlers': {
@@ -32,6 +32,3 @@ LOGGING = {
         'handlers': ['console'],
     },
 }
-
-# import logging
-# logger = logging.getLogger(__name__)
