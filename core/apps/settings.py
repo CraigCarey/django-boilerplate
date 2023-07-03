@@ -10,6 +10,7 @@ INSTALLED_APPS += (
 CUSTOM_APPS = (
     'accounts',
     'articles',
+    'screener',
 )
 
 for a in CUSTOM_APPS:
